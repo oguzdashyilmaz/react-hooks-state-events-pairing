@@ -6,6 +6,7 @@ function Video({id, title, embedUrl, views, createdAt, upvotes, downvotes, comme
 
   const [likes, setLikes] = useState(upvotes);
   const [dislikes, setdisLikes] = useState(downvotes);
+  const [show, setShow] = useState(true);
 
   return (
     <div>
@@ -19,6 +20,7 @@ function Video({id, title, embedUrl, views, createdAt, upvotes, downvotes, comme
         <button>{downvotes}</button>
       </div>
       <button>Hide Comments</button>
+      <hr></hr>
       <p>{comments.id}</p>
       <p>{comments.user}</p>
       <h2>{comments.comment}</h2>
