@@ -6,7 +6,10 @@ function App() {
 
   return (
     <div className="App">
-      <Video/>
+      <Video title={video.title} views={video.views} upvotes={video.upvotes}
+      downvotes={video.downvotes} comments={video.comments} createdAt={video.createdAt}
+      uri={video.embedUrl}
+      />
     </div>
   );
 }

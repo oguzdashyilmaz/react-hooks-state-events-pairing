@@ -2,28 +2,54 @@ import React from 'react';
 import video from '../data/video';
 import {useState} from 'react';
 
-function Video({id, title, embedUrl, views, createdAt, upvotes, downvotes, comments}) {
+function Video({title, uri, views, createdAt, upvotes, downvotes, comments}) {
 
-  const [likes, setLikes] = useState(upvotes);
-  const [dislikes, setdisLikes] = useState(downvotes);
+  const [like, setlike] = useState(upvotes);
+  const [dislike, setdislike] = useState(downvotes);
   const [show, setShow] = useState(true);
 
   return (
     <div>
-      <h1 className='title'>{video.title}</h1>
+      <iframe
+          width="919"
+          height="525"
+          src={uri}
+          frameBorder="0"
+          allowFullScreen
+          title="Thinking in React"
+      />
+      <h1 className='title'>{title}</h1>
       <div>
-        <span>{views} | </span>
-        <span>{createdAt}</span>
+        <span>{views} Views |</span>
+        <span> Uploaded {createdAt}</span>
       </div>
       <div>
-        <button>{upvotes}</button>
-        <button>{downvotes}</button>
+        <button onClick={()=>setlike(like+1)}>{like}👍</button>
+        <button onClick={()=>setdislike(dislike+1)}>{dislike}👎 </button>
       </div>
-      <button>Hide Comments</button>
+
       <hr></hr>
-      <p>{comments.id}</p>
-      <p>{comments.user}</p>
-      <h2>{comments.comment}</h2>
+      
+      <button onClick={()=> setShow(!show)}>
+          {show ? "Hide" : "Show"} Comments
+      </button>
+
+      {
+        show ? (
+          <div>
+            <h4>{comments.length} Comments</h4>
+            {comments.map(comment => {
+              return (
+                <div key={comment.id}>
+                  <h5>{comment.user}</h5>
+                  <h5>{comment.comment}</h5>
+                </div>
+              )
+            })}
+          </div>
+        ) : null
+      }
+
     </div>
   )
 }
